@@ -8,4 +8,4 @@ Kamila Socha
 
 Sachinandan Sahoo
 
-Ethan Bartch
+Ethan Bartch API used: WHO Global Health Observatory (GHO) API
