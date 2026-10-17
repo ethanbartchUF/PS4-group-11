@@ -4,7 +4,7 @@ Group members
 
 Kyle Knapp: FDA Drug Shortage API
 
-Kamila Socha
+Kamila Socha: Cat Fact API
 
 Sachinandan Sahoo
 
