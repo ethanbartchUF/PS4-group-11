@@ -186,11 +186,11 @@ if generation_choice.isdigit():
 )
 
     if pokemon_list:
-    print("\nThose Pokémon are:")
+        print("\nThose Pokémon are:")
 
-        for pokemon_name in pokemon_list:
-            formatted_name = pokemon_name.replace("-", " ").title()
-            print(f"- {formatted_name}")
+    for pokemon_name in pokemon_list:
+        formatted_name = pokemon_name.replace("-", " ").title()
+        print(f"- {formatted_name}")
 else:
     print("No Pokémon of that type were introduced in this generation.")
 
