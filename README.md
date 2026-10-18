@@ -6,6 +6,6 @@ Kyle Knapp: FDA Drug Shortage API
 
 Kamila Socha: Cat Fact API
 
-Sachinandan Sahoo
+Sachinandan Sahoo: Pokemon API
 
 Ethan Bartch API used: WHO Global Health Observatory (GHO) API
