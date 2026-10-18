@@ -81,6 +81,7 @@ for generation in generations:
     type_counts = {}
     single_type = 0
     dual_type = 0
+    type_pokemon = {}
 
     for species in generation["species"]:
 
@@ -105,6 +106,12 @@ for generation in generations:
                 type_counts[pokemon_type] += 1
             else:
                 type_counts[pokemon_type] = 1
+                
+            # Also save the names of Pokémon belonging to each type
+            if pokemon_type not in type_pokemon:
+                type_pokemon[pokemon_type] = []
+
+            type_pokemon[pokemon_type].append(species["name"])
 
         # Count single-type vs dual-type Pokémon
         if len(pokemon_types) == 1:
@@ -118,10 +125,74 @@ for generation in generations:
         "region": generation["region"],
         "total": len(generation["species"]),
         "types": type_counts,
+        "type_pokemon": type_pokemon,
         "single": single_type,
         "dual": dual_type
     })
 print("Done analyzing all generations!")
+
+# ------------------------------------------------------------
+# Interactive generation and type lookup
+
+print("\nInteractive Pokémon Type Lookup")
+
+generation_choice = input(
+    "Enter a generation number (1-9): "
+)
+
+if generation_choice.isdigit():
+    generation_choice = int(generation_choice)
+
+    selected_generation = None
+
+    for generation in generation_results:
+        if generation["id"] == generation_choice:
+            selected_generation = generation
+            break
+
+    if selected_generation is not None:
+
+        print(
+            f"\nGeneration {selected_generation['id']} "
+            f"({selected_generation['region'].title()})"
+        )
+
+        print(
+            f"Total Pokémon introduced: "
+            f"{selected_generation['total']}"
+        )
+
+        print(
+            f"Single-type Pokémon: "
+            f"{selected_generation['single']}"
+        )
+
+        print(
+            f"Dual-type Pokémon: "
+            f"{selected_generation['dual']}"
+        )
+
+        type_choice = input(
+            "\nEnter a Pokémon type to look up "
+            "(for example Fire, Water, or Grass): "
+        ).lower()
+
+        type_count = selected_generation["types"].get(type_choice, 0)
+        pokemon_list = selected_generation["type_pokemon"].get(type_choice, [])
+
+        print(
+            f"\nGeneration {generation_choice} introduced "
+            f"{type_count} {type_choice.title()}-type Pokémon."
+)
+
+    if pokemon_list:
+    print("\nThose Pokémon are:")
+
+        for pokemon_name in pokemon_list:
+            formatted_name = pokemon_name.replace("-", " ").title()
+            print(f"- {formatted_name}")
+else:
+    print("No Pokémon of that type were introduced in this generation.")
 
 # -------------------------------------------------------------------
 
